@@ -1,6 +1,6 @@
-package csnotes;
+package Notes;
 
-public class CSnotes {
+public class Notes {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
