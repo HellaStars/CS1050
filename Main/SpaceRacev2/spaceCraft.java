@@ -18,19 +18,19 @@ public class spaceCraft {
 			nWho = a;
 			eWHO = engineModeWho(o); //engine mode (movement)
 			pWho += eWHO; //adds the result from the engine and adds it to itself
-			pWho = Math.max(pWho, 0); // makes sure the result is bigger than 0 pWho >= 0
+			pWho = Math.max(pWho, 1); // makes sure the result is bigger than 0 pWho >= 0 and checks if pWho is greater or equal to 70
 			return(pWho);
 		} else if (c == 2) {
 			nE5 = a;
 			eE5 = engineModeE5(o); //engine mode (movement)
 			pE5 += eE5; //adds the result of the engine to the position
-			pE5 = Math.max(0, pE5); //pE5 >= 0
+			pE5 = Math.max(pE5, 1); //pE5 >= 0 & pE5 <=70
 			return(pE5);
 		} else if (c == 3) {
 			nUSS = a;
 			eUSS = engineModeUSS(o); //engine mode (movement)
 			pUSS += eUSS; //adds the result of the engine to the position
-			pUSS = Math.max(0, pUSS); // pUSS >= 0
+			pUSS = Math.max(pUSS, 1); // pUSS >= 0 & pUSS <= 70
 			return (pUSS);
 		} else return (0);
 	}
@@ -38,17 +38,17 @@ public class spaceCraft {
 		int tNum = 0; //sets it too 0 so it can later calc it
 		switch (mode) {
 		case 1,2:
-			tNum = 4;
+			tNum = 10;
 		return(tNum);
 		case 3,4:
 			tNum = -1;
 		case 5,6,7:
-			tNum = ((int)Math.random()*10) + 4; //Randomizes between 1 - 10 and adds 4
+			tNum = ((int)Math.random()*10) + 7; //Randomizes between 1 - 10 and adds 4
 		return(tNum);
 		case 8,9:
-			tNum = 70;
+			tNum = 80;
 		case 10:
-			tNum = -22; // for whatever reason it really loves this one lol so nerfing it
+			tNum = -20; // for whatever reason it really loves this one lol so nerfing it
 			return(tNum);
 		}
 		return(tNum);
@@ -57,13 +57,13 @@ public class spaceCraft {
 		int eNum = 0; //sets it too 0 so it can later calc it
 		switch (eMode) {
 		case 1, 2, 3, 4 ,5:
-			eNum += 1;
+			eNum = 1;
 		return(eNum);
 		case 6, 7:
-			eNum = Math.max(eNum-3, 1);
+			eNum = -3;
 		return(eNum);
 		case 8,9,10:
-			eNum += 5;
+			eNum = 5;
 		return(eNum);
 		} 
 		return(eNum);
