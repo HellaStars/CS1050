@@ -4,37 +4,23 @@ public class spaceCraft {
 
 	//technically All the ships will have the same bones. Especially the public part. But I would have to pass a string through to check
 	//which ships are active. Or maybe just an int. then do a if (same idea for the string)
-	private int pWho; //position Tardis (dr. Who)
-	private int pE5; //Position Eagle 5
-	private int pUSS; // position USS 
-	private String nWho;
-	private String nE5;
-	private String nUSS;
-	public int setShip(String a, int c, int o) {
-		int eWHO; //engine for tardis
-		int eE5;// Eagle 5 engine
-		int eUSS; //USS enterprise engine
+	private int position;
+	private String shipName;
+	
+	spaceCraft(String name){this.shipName = name; this.position = 0;}
+	public void setShip(int c, int r) {
 		if (c == 1) {
-			nWho = a;
-			eWHO = engineModeWho(o); //engine mode (movement)
-			pWho += eWHO; //adds the result from the engine and adds it to itself
-			pWho = Math.max(pWho, 1); // makes sure the result is bigger than 0 pWho >= 0 and checks if pWho is greater or equal to 70
-			return(pWho);
+			position += engineModeWho(r); //adds the result from the engine and adds it to itself
+			position = Math.max(position, 0); // makes sure the result is bigger than 0 pWho >= 0 and checks if pWho is greater or equal to 70
 		} else if (c == 2) {
-			nE5 = a;
-			eE5 = engineModeE5(o); //engine mode (movement)
-			pE5 += eE5; //adds the result of the engine to the position
-			pE5 = Math.max(pE5, 1); //pE5 >= 0 & pE5 <=70
-			return(pE5);
-		} else if (c == 3) {
-			nUSS = a;
-			eUSS = engineModeUSS(o); //engine mode (movement)
-			pUSS += eUSS; //adds the result of the engine to the position
-			pUSS = Math.max(pUSS, 1); // pUSS >= 0 & pUSS <= 70
-			return (pUSS);
-		} else return (0);
+			position += engineModeE5(r); //adds the result of the engine to the position
+			position = Math.max(position, 0); //pE5 >= 0 & pE5 <=70
+		} else if (c == 3) { //engine mode (movement)
+			position += engineModeUSS(r); //adds the result of the engine to the position
+			position = Math.max(position, 0); // pUSS >= 0 & pUSS <= 70
+		}
 	}
-	private static int engineModeWho(int mode) {
+	private int engineModeWho(int mode) {
 		int tNum = 0; //sets it too 0 so it can later calc it
 		switch (mode) {
 		case 1,2:
@@ -46,14 +32,14 @@ public class spaceCraft {
 			tNum = ((int)Math.random()*10) + 7; //Randomizes between 1 - 10 and adds 4
 		return(tNum);
 		case 8,9:
-			tNum = 80;
+			tNum = 50;
 		case 10:
 			tNum = -20; // for whatever reason it really loves this one lol so nerfing it
 			return(tNum);
 		}
 		return(tNum);
 	}
-	private static int engineModeE5(int eMode) {
+	private int engineModeE5(int eMode) {
 		int eNum = 0; //sets it too 0 so it can later calc it
 		switch (eMode) {
 		case 1, 2, 3, 4 ,5:
@@ -68,7 +54,7 @@ public class spaceCraft {
 		} 
 		return(eNum);
 	}
-	private static int engineModeUSS(int uMode) {
+	private int engineModeUSS(int uMode) {
 		int uNum = 0; 
 		switch (uMode) {
 		case 2,3,4:
@@ -83,17 +69,13 @@ public class spaceCraft {
 		}
 		return(uNum);
 	}
-	public int getShip(int c){
-		if (c == 1) {
-			return (pWho);
-		} else if (c == 2) {
-			return(pE5);
-		} else if (c == 3) {
-			return (pUSS);
-		}else return (0);
-	}
+	public int tardisPosition() {return position;}
+	public int E5Position() {return position;}
+	public int USSPosition() {return position;}
+	public String getName() {return this.shipName;}
+}
+	/*V1 code
 		public String nameWho() {
-			
 			return(nWho);
 		}
 		public String nameE5() {
@@ -104,8 +86,8 @@ public class spaceCraft {
 		}
 }
 
-	/*V1 code
-	 * public int WHO(int r, int p) { // Tardis V1
+	
+	 * public int setWHO(String USS ,int r) { // Tardis V1
 		int eWHO; //engine for tardis
 		int pWHO = p; // takes the current position from out side the program to hold it (also checks for 0. Should it happen)
 		eWHO = engineModeWho(r); //engine mode (movement)
@@ -114,7 +96,7 @@ public class spaceCraft {
 		return(pWHO);
 	} 
 	
-	public int E5(int eR, int eP) {
+	public int setE5(String USS ,int eR) {
 		int eE5;
 		int pE5 = eP;
 		eE5 = engineModeE5(eR); 
@@ -124,7 +106,7 @@ public class spaceCraft {
 	}
 	
 
-	public int USS(int uR, int uP) {
+	public int setUSS(String USS, int uR) {
 		int eUSS;
 		int pUSS = uP; 
 		eUSS = engineModeUSS(uR); 

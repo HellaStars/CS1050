@@ -2,52 +2,54 @@ package spaceRace; // Space Race V3 by Asta Walor-Scott
 
 public class spaceRacev3 {
 	final static int uniSize = 70; 
-	static spaceCraft SHIP = new spaceCraft();
+	static spaceCraft TARDIS = new spaceCraft("Tardis");
+	static spaceCraft E5 = new spaceCraft("E5");
+	static spaceCraft USS = new spaceCraft("USS");
 
 	public static void main(String[] args) {
 
 
-		while (Math.max(Math.max(SHIP.getShip(1),SHIP.getShip(2)), SHIP.getShip(3)) < uniSize) {
+		while (Math.max(Math.max(TARDIS.tardisPosition(),E5.E5Position()), USS.USSPosition()) < uniSize) {
 			char sArray[] = { '-', '#', '&', '^', '|', 'B' };
 			StringBuilder str = new StringBuilder("");
-			SHIP.setShip("Tardis", 1, random()); //name, identifying num, ran num
-			SHIP.setShip("Eagle 5",2, random());
-			SHIP.setShip("USS Enterprise",3, random());
+			TARDIS.setShip( 1, random()); //name, identifying num, ran num
+			E5.setShip(2, random());
+			USS.setShip(3, random());
 
-			if (Math.max(Math.max(SHIP.getShip(1), SHIP.getShip(2)), SHIP.getShip(3)) < uniSize) {
+			if (Math.max(Math.max(TARDIS.tardisPosition(), E5.E5Position()), USS.USSPosition()) < uniSize) {
 				str.insert(0, sArray[4]);
 
 				for (int z = 1; z <= uniSize - 1; z++) {
 					str.insert(z, sArray[0]);
 				}
 
-				str.setCharAt(SHIP.getShip(1), sArray[1]);
-				str.setCharAt(SHIP.getShip(2), sArray[2]);
-				str.setCharAt(SHIP.getShip(3), sArray[3]);
+				str.setCharAt(TARDIS.tardisPosition(), sArray[1]);
+				str.setCharAt(E5.E5Position(), sArray[2]);
+				str.setCharAt(USS.USSPosition(), sArray[3]);
 				
-				if (SHIP.getShip(1) == SHIP.getShip(2)) {
-					str.setCharAt(SHIP.getShip(1), sArray[5]);
-					str.setCharAt(SHIP.getShip(2), sArray[0]);
+				if (TARDIS.tardisPosition() == E5.E5Position() && TARDIS.tardisPosition() > 0) {
+					str.setCharAt(TARDIS.tardisPosition(), sArray[5]);
+					str.setCharAt(E5.E5Position(), sArray[0]);
 				}
-				if (SHIP.getShip(1) == SHIP.getShip(3)) {
-					str.setCharAt(SHIP.getShip(1), sArray[5]);
-					str.setCharAt(SHIP.getShip(3), sArray[0]);
+				if (TARDIS.tardisPosition() == USS.USSPosition() && TARDIS.tardisPosition() > 0) {
+					str.setCharAt(TARDIS.tardisPosition(), sArray[5]);
+					str.setCharAt(USS.USSPosition(), sArray[0]);
 				}
-				if (SHIP.getShip(2) == SHIP.getShip(3)){
-					str.setCharAt(SHIP.getShip(2), sArray[5]);
-					str.setCharAt(SHIP.getShip(3), sArray[0]);
+				if (E5.E5Position() == USS.USSPosition() && USS.USSPosition() > 0){
+					str.setCharAt(E5.E5Position(), sArray[5]);
+					str.setCharAt(USS.USSPosition(), sArray[0]);
 				}
 				
 				str.append(sArray[4]);
-			} else if (Math.max(Math.max(SHIP.getShip(1),SHIP.getShip(2)), SHIP.getShip(3)) >= uniSize) {
-				if (SHIP.getShip(1) >= uniSize) {
-					str.append(SHIP.nameWho() + " Won!");
+			} else if (Math.max(Math.max(TARDIS.tardisPosition(),E5.E5Position()), USS.USSPosition()) >= uniSize) {
+				if (TARDIS.tardisPosition() >= uniSize) {
+					str.append(TARDIS.getName() + " Won!");
 				} 
-				if (SHIP.getShip(2) >= uniSize) {
-					str.append(SHIP.nameE5() + " Won!");
+				if (E5.E5Position() >= uniSize) {
+					str.append(E5.getName() + " Won!");
 				}
-				if (SHIP.getShip(3) >= uniSize) {
-					str.append(SHIP.nameUSS() + " Won!");
+				if (USS.USSPosition() >= uniSize) {
+					str.append(USS.getName() + " Won!");
 				}
 			}
 			try {
